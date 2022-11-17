@@ -28,6 +28,14 @@ jobs:
 
 # https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
-  sample:
+  deploy:
     jobs:
       - test-and-lint
+      - docker/publish:
+        requires:
+          - test-and-lint
+        filters:
+          branches:
+            only: master
+        image: $DOCKER_LOGIN/$HEROKU_APP_NAME
+      # - heroku/deploy-via-git
