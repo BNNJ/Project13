@@ -30,15 +30,15 @@ jobs:
       - image: cimg/base:stable
     steps:
       - heroku/install
-      - docker/pull:
-          images: '$DOCKER_LOGIN/$HEROKU_APP_NAME:$CIRCLE_SHA1'
+      # - docker/pull:
+      #     images: '$DOCKER_LOGIN/$HEROKU_APP_NAME:$CIRCLE_SHA1'
+      - run:
+          name: pull-from-dockerhub
+          command: |
+            docker login --username=$DOCKER_LOGIN --password=$DOCKER_PASSWORD
+            docker pull $DOCKER_LOGIN/$HEROKU_APP_NAME:$CIRCLE_SHA1
       - heroku/push-docker-image:
           process-types: web
-      # - run:
-      #     name: pull-from-dockerhub
-      #     command: |
-      #       docker login --username=$DOCKER_LOGIN --password=$DOCKER_PASSWORD
-      #       docker pull $DOCKER_LOGIN/$HEROKU_APP_NAME:$CIRCLE_SHA1
       # - run:
       #     name: push-to-heroku
       #     command: |
