@@ -46,8 +46,8 @@ jobs:
           command: |
             heroku container:login
             docker tag $DOCKER_LOGIN/$HEROKU_APP_NAME:latest registry.heroku.com/$HEROKU_APP_NAME/web
-            # docker push registry.heroku.com/$HEROKU_APP_NAME/web
-            heroku container:push -a $HEROKU_APP_NAME web
+            docker push registry.heroku.com/$HEROKU_APP_NAME/web
+            # heroku container:push -a $HEROKU_APP_NAME web
             heroku container:release -a $HEROKU_APP_NAME  web
 
 
