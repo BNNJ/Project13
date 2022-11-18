@@ -37,17 +37,18 @@ jobs:
           name: pull-from-dockerhub
           command: |
             docker login --username=$DOCKER_LOGIN --password=$DOCKER_PASSWORD
-            docker pull $DOCKER_LOGIN/$HEROKU_APP_NAME:$CIRCLE_SHA1
-      - heroku/push-docker-image:
-          app-name: oc-lettings-pf
-          process-types: web
-      # - run:
-      #     name: push-to-heroku
-      #     command: |
-      #       heroku container:login
-      #       docker tag <image> registry.heroku.com/$HEROKU_APP_NAME/web
-      #       docker push registry.heroku.com/$HEROKU_APP_NAME/web
-      #       heroku container:release web # --app ?
+            docker pull $DOCKER_LOGIN/$HEROKU_APP_NAME:latest
+      # - heroku/push-docker-image:
+      #     app-name: oc-lettings-pf
+      #     process-types: web
+      - run:
+          name: push-to-heroku
+          command: |
+            heroku container:login
+            docker tag $DOCKER_LOGIN/$HEROKU_APP_NAME:latest registry.heroku.com/$HEROKU_APP_NAME/web
+            # docker push registry.heroku.com/$HEROKU_APP_NAME/web
+            heroku container:push -a $HEROKU_APP_NAME web
+            heroku container:release -a $HEROKU_APP_NAME  web
 
 
 # https://circleci.com/docs/2.0/configuration-reference/#workflows
