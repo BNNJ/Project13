@@ -37,7 +37,7 @@ jobs:
           name: pull-from-dockerhub
           command: |
             docker login --username=$DOCKER_LOGIN --password=$DOCKER_PASSWORD
-            docker pull $DOCKER_LOGIN/$HEROKU_APP_NAME:latest
+            docker pull $DOCKER_LOGIN/$HEROKU_APP_NAME:$CIRCLE_SHA1
       - heroku/push-docker-image:
           app-name: oc-lettings-pf
           process-types: web
@@ -62,7 +62,7 @@ workflows:
             branches:
               only: master
           image: $DOCKER_LOGIN/$HEROKU_APP_NAME
-          tag: $CIRCLE_SHA1
+          tag: '$CIRCLE_SHA1,latest'
       - deploy-to-heroku:
           requires:
             - test-and-lint
