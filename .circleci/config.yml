@@ -27,7 +27,7 @@ jobs:
           command: flake8
   deploy-to-heroku:
     docker:
-      - image: cimg/base
+      - image: cimg/base:stable
     steps:
       - heroku/install
       - docker/pull:
