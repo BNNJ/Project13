@@ -31,7 +31,7 @@ jobs:
     steps:
       - heroku/install
       - docker/pull:
-          images: $DOCKER_LOGIN/$HEROKU_APP_NAME:$CIRCLE_SHA1
+          images: '$DOCKER_LOGIN/$HEROKU_APP_NAME:$CIRCLE_SHA1'
       - heroku/push-docker-image:
           process-types: web
       # - run:
