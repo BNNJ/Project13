@@ -25,6 +25,21 @@ jobs:
       - run:
           name: Run flake8
           command: flake8
+  # deploy-to-heroku:
+  #   docker:
+  #     - image: whatever ?
+  #   steps:
+  #     - run:
+  #         name: pull-from-dockerhub
+  #         command: foobar
+  #     - run:
+  #         name: push-to-heroku
+  #         command: |
+  #           heroku container:login    OR ?
+  #           docker login --username=_ --password=$(heroku auth:token) registry.heroku.com
+  #           docker tag <image> registry.heroku.com/<app>/<process-type>
+  #           docker push registry.heroku.com/<app>/<process-type>
+
 
 # https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
@@ -40,7 +55,7 @@ workflows:
           image: $DOCKER_LOGIN/$HEROKU_APP_NAME
         # - heroku/deploy-via-git
         #   requires:
-        #     - build_and_test
+        #     - test-and-lint
         #     - docker/publish
         #   filters:
         #     branches:
