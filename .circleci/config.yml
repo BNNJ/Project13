@@ -25,20 +25,27 @@ jobs:
       - run:
           name: Run flake8
           command: flake8
-  # deploy-to-heroku:
-  #   docker:
-  #     - image: whatever ?
-  #   steps:
-  #     - run:
-  #         name: pull-from-dockerhub
-  #         command: foobar
-  #     - run:
-  #         name: push-to-heroku
-  #         command: |
-  #           heroku container:login    OR ?
-  #           docker login --username=_ --password=$(heroku auth:token) registry.heroku.com
-  #           docker tag <image> registry.heroku.com/<app>/<process-type>
-  #           docker push registry.heroku.com/<app>/<process-type>
+  deploy-to-heroku:
+    docker:
+      - image: cimg/base
+    steps:
+      - heroku/install
+      - docker/pull:
+          images: $DOCKER_LOGIN/$HEROKU_APP_NAME:$CIRCLE_SHA1
+      - heroku/push-docker-image:
+          process-types: web
+      # - run:
+      #     name: pull-from-dockerhub
+      #     command: |
+      #       docker login --username=$DOCKER_LOGIN --password=$DOCKER_PASSWORD
+      #       docker pull $DOCKER_LOGIN/$HEROKU_APP_NAME:$CIRCLE_SHA1
+      # - run:
+      #     name: push-to-heroku
+      #     command: |
+      #       heroku container:login
+      #       docker tag <image> registry.heroku.com/$HEROKU_APP_NAME/web
+      #       docker push registry.heroku.com/$HEROKU_APP_NAME/web
+      #       heroku container:release web # --app ?
 
 
 # https://circleci.com/docs/2.0/configuration-reference/#workflows
@@ -52,11 +59,11 @@ workflows:
           filters:
             branches:
               only: master
-          image: $DOCKER_LOGIN/$HEROKU_APP_NAME
-        # - heroku/deploy-via-git
-        #   requires:
-        #     - test-and-lint
-        #     - docker/publish
-        #   filters:
-        #     branches:
-        #       only: master
+          image: $DOCKER_LOGIN/$HEROKU_APP_NAME:$CIRCLE_SHA1
+      - deploy-to-heroku:
+          requires:
+            - test-and-lint
+            - docker/publish
+          filters:
+            branches:
+              only: master
