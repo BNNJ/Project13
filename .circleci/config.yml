@@ -62,7 +62,7 @@ workflows:
             branches:
               only: master
           image: $DOCKER_LOGIN/$HEROKU_APP_NAME
-          tag: $CIRCLE_SHA1, latest
+          tag: '$CIRCLE_SHA1, latest'
       - deploy-to-heroku:
           requires:
             - test-and-lint
