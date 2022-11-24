@@ -34,7 +34,7 @@ jobs:
       #     images: '$DOCKER_LOGIN/$HEROKU_APP_NAME:$CIRCLE_SHA1'
       - setup_remote_docker
       - run:
-          name: pull-from-dockerhub
+          name: Pull from Dockerhub
           command: |
             docker login --username=$DOCKER_LOGIN --password=$DOCKER_PASSWORD
             docker pull $DOCKER_LOGIN/$HEROKU_APP_NAME:latest
@@ -42,7 +42,7 @@ jobs:
       #     app-name: oc-lettings-pf
       #     process-types: web
       - run:
-          name: push-to-heroku
+          name: Push to-Heroku
           command: |
             heroku container:login
             docker tag $DOCKER_LOGIN/$HEROKU_APP_NAME:latest registry.heroku.com/$HEROKU_APP_NAME/web
