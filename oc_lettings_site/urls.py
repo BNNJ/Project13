@@ -3,11 +3,14 @@ from django.urls import path, include
 
 from .views import index
 
+
 class SentryTestError(Exception):
     pass
 
+
 def raise_error(*args, **kwargs):
     raise SentryTestError("Test error for Sentry")
+
 
 urlpatterns = [
     path("", index, name="index"),
