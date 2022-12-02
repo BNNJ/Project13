@@ -30,26 +30,20 @@ jobs:
       - image: cimg/base:stable
     steps:
       - heroku/install
-      # - docker/pull:
-      #     images: '$DOCKER_LOGIN/$HEROKU_APP_NAME:$CIRCLE_SHA1'
       - setup_remote_docker
       - run:
           name: Pull from Dockerhub
           command: |
             docker login --username=$DOCKER_LOGIN --password=$DOCKER_PASSWORD
             docker pull $DOCKER_LOGIN/$HEROKU_APP_NAME:latest
-      # - heroku/push-docker-image:
-      #     app-name: oc-lettings-pf
-      #     process-types: web
       - run:
-          name: Push to-Heroku
+          name: Push to Heroku
           command: |
             heroku container:login
             docker tag $DOCKER_LOGIN/$HEROKU_APP_NAME:latest registry.heroku.com/$HEROKU_APP_NAME/web
             docker push registry.heroku.com/$HEROKU_APP_NAME/web
             # heroku container:push -a $HEROKU_APP_NAME web
             heroku container:release -a $HEROKU_APP_NAME  web
-
 
 # https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
@@ -63,7 +57,7 @@ workflows:
             branches:
               only: master
           image: $DOCKER_LOGIN/$HEROKU_APP_NAME
-          tag: '$CIRCLE_SHA1,latest'
+          tag: $CIRCLE_SHA1,latest
       - deploy-to-heroku:
           requires:
             - test-and-lint
