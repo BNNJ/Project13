@@ -54,7 +54,7 @@ Dans le reste de la documentation sur le développement local, il est supposé q
 
 - `cd /path/to/Python-OC-Lettings-FR`
 - `source venv/bin/activate`
-- `pytest`
+- `./python -m manage.py test`
 
 #### Base de données
 
