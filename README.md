@@ -1,6 +1,7 @@
 # Orange County Lettings
 
 OpenClassrooms project 13
+
 [Original doc (in french)](README_oc.md)
 
 ## Description
@@ -62,3 +63,27 @@ Start the server:
 python manage.py runserver
 ```
 You can now access the app from `localhost:8000` from your browser
+
+## Docker
+
+Pull the image from dockerhub:
+```sh
+docker pull bnnj/oc-lettings-pf:latest
+```
+Instanciate a container from the image:
+```sh
+docker run --name {container_name} -e PORT=8000 -p 8000:8000 bnnj/oc-lettings-pf
+```
+
+You can now access the app from `localhost:8000` from your browser
+
+Start and stop the container:
+```sh
+docker start {container_name}
+docker stop {container_name}
+```
+
+## Heroku
+
+Open {foo} in your browser.
+
