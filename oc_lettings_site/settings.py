@@ -113,11 +113,11 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 
-SENTRY_DSN = (
-    "https://625b30085dbb470dbe400bc10c23e2b3@o4504214655205376"
-    ".ingest.sentry.io/4504214661234688"
-)
-# os.environ.get("SENTRY_DSN")
+# SENTRY_DSN = (
+#     "https://625b30085dbb470dbe400bc10c23e2b3@o4504214655205376"
+#     ".ingest.sentry.io/4504214661234688"
+# )
+SENTRY_DSN = os.environ.get("SENTRY_DSN")
 sentry_sdk.init(
     dsn=SENTRY_DSN,
     integrations=[
