@@ -1,3 +1,5 @@
+[![CircleCI](https://dl.circleci.com/insights-snapshot/gh/BNNJ/Project13/master/deploy/badge.svg?window=30d)](https://app.circleci.com/insights/github/BNNJ/Project13/workflows/deploy/overview?branch=master&reporting-window=last-30-days&insights-snapshot=true)
+
 # Orange County Lettings
 
 OpenClassrooms project 13
