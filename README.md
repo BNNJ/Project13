@@ -95,5 +95,5 @@ docker stop {container_name}
 
 ## Heroku
 
-Open {foo} in your browser.
+https://oc-lettings-pf.herokuapp.com/
 
