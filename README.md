@@ -21,10 +21,6 @@ Here's a quick recap of the workflow:
 - pip
 - python 3.6+
 
-environment variables:
-- SENTRY_DSN
-- PORT 
-
 ## Setup
 
 Clone the project:
@@ -94,6 +90,12 @@ docker stop {container_name}
 ```
 
 ## Heroku
+
+The only required configuration on heroku is a an environment variable.  
+`SENTRY_DSN` is required in order for sentry to work.  
+You can find this variable in the 'client keys' page of your sentry project's interface.
+
+Heroku will provide its own `PORT` variable so you don't have to worry about it.
 
 https://oc-lettings-pf.herokuapp.com/
 
