@@ -16,7 +16,7 @@ SECRET_KEY = "fp$9^593hsriajg$_%=5trot9g!1qa@ew(o-1#@=&4%=hp46(s"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["oc-lettings-pf.herokuapp.com", "localhost"]
+ALLOWED_HOSTS = ["oc-lettings-pf.herokuapp.com","localhost"]
 
 
 # Application definition
@@ -113,10 +113,6 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 
-# SENTRY_DSN = (
-#     "https://625b30085dbb470dbe400bc10c23e2b3@o4504214655205376"
-#     ".ingest.sentry.io/4504214661234688"
-# )
 SENTRY_DSN = os.environ.get("SENTRY_DSN")
 sentry_sdk.init(
     dsn=SENTRY_DSN,
